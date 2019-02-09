@@ -1,7 +1,7 @@
 <html>
 <body>
-    <style type="text/css">
-   TABLE {
+<style type="text/css">
+ TABLE {
     background: aliceblue; /* Цвет фона таблицы */
     border: 1px double #000; /* Рамка вокруг таблицы */
    }
@@ -9,46 +9,45 @@
     padding: 5px; /* Поля вокруг текста */
     border: 1px solid #000; /* Рамка вокруг ячеек */
    }
-  </style>
+</style>
 <h2>Двумерный массив заполняется числами Фиббоначи</h2>
 
 <form method="post" action="#">
     <span>Введите размерность массива</span>
-    <input type="text" name="x" placeholder="x">
-    <input type="text" name="y" placeholder="y">
+    <input type="text" name="x" placeholder="x" required>
+    <input type="text" name="y" placeholder="y" required>
     <input type="submit" value="Отправить">
 </form>
 <?php
 if( isset($_POST['x']) and isset($_POST['y'])){
     $x = $_POST['x'];
     $y = $_POST['y'];
-    echo 'Размерность массива - строк - '.$x.', столбцов - '.$y;
+    echo 'Размерность массива - строк - '.$x.', столбцов - '.$y.'<br/>';
+}else{
+    $x=6;$y=6;
 }
 $razmer = $x*$y;
-?>
-<?php
-// массив для элементов
-$a = array();
+
+// массив для элементов ряда Фиббоначи
+$fibb = array();
 // первые два - единицы    
-$a[0] = '1'; // они в виде строки!
-$a[1] = '1';
+$fibb[0] = '1'; // они в виде строки!
+$fibb[1] = '1';
 // а дальше - просто складываем два предыдущих
 for ($i = 2; $i < $razmer; $i++){
-        $a[$i]= bcadd($a[$i-1], $a[$i-2]);
+        $fibb[$i]= bcadd($fibb[$i-1], $fibb[$i-2]);
     }
-?>
 
-<?php
 
-$keys =array();
+$keys =array();//массив ключей для двумерного массива
 for ($i=0; $i<=$x-1; $i++){
-    $keys[]= (string)$i;
+    $keys[]= (string)$i; //записываем в виде строк
 }
-$new_arr = array();
+$new_arr = array();//Наш основной массив
 
-for ($i=0; $i<count($a); $i++)
-    $new_arr[$i/count($keys)][$keys[$i % count($keys)]] = $a[$i];
-echo '<PRE>'; ?>
+for ($i=0; $i<count($fibb); $i++)
+    $new_arr[$i/count($keys)][$keys[$i % count($keys)]] = $fibb[$i]; //запись ряда Фиббоначи в двумерный массив
+?>
 <table> 
 <?php
     for ($k=0;$k<count($keys);$k++) { 
@@ -59,15 +58,17 @@ echo '<PRE>'; ?>
     }
 ?>
 <?php
+//подсчитаем сумму чисел второстепенной диагонали
 for($i=1;$i<count($keys)+1;$i++){
     $sum[] = $new_arr[$i-1][count($keys)-$i];
 }
-echo 'Сумма чисел находящихся на диагонали ['.count($keys).'][0]-[0]['.count($keys).'] - '.array_sum($sum);
+$arr = count($keys)-1;//размер массива
+echo 'Сумма чисел находящихся на диагонали ['.$arr.'][0]-[0]['.$arr.'] - '.array_sum($sum);
 echo'&nbsp(';
 foreach ($sum as $array){
     echo $array.',';
 };
-echo')';
+echo')<br /><br />';
 ?> 
     
     
