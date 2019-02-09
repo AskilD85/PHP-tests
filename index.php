@@ -13,12 +13,13 @@
 <h2>Двумерный массив заполняется числами Фиббоначи</h2>
 
 <form method="post" action="#">
-    <span>Введите размерность массива</span>
+    <span>Введите размерность массива </span>
     <input type="text" name="x" placeholder="x" required>
     <input type="text" name="y" placeholder="y" required>
     <input type="submit" value="Отправить">
 </form>
 <?php
+echo 'по умолчанию - размерность 6х6<br/>';
 if( isset($_POST['x']) and isset($_POST['y'])){
     $x = $_POST['x'];
     $y = $_POST['y'];
