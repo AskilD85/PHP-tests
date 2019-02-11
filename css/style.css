@@ -1,0 +1,19 @@
+html, body {
+    height: 100%;
+        
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+TABLE {
+    background: aliceblue; /* Цвет фона таблицы */
+    border: 1px double #000; /* Рамка вокруг таблицы */
+   }
+   TD, TH {
+    padding: 5px; /* Поля вокруг текста */
+    border: 1px solid #000; /* Рамка вокруг ячеек */
+   }
+   
